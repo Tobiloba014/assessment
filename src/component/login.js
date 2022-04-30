@@ -21,8 +21,8 @@ function Login() {
   const onsuccess = () => {
    navigate("/home")             
   }
-  const onfailure = (message) => {
-    setServerError(message)
+  const onfailure = (error) => {
+    setServerError(error)
   }
   const signUpHandler = () => {
     navigate("/SignUp")
@@ -30,6 +30,7 @@ function Login() {
   }
 
   return (
+    <body>
     <div className="main">
       <div className="sub-main">
         <div>
@@ -39,15 +40,20 @@ function Login() {
             </div>
 
 
-          </div>
+          </div>  
+          <div>
+        <h2 style={{textAlign: "center"}}> Jesus House baltimore </h2>
+        <p style={{textAlign: "center"}}>
+        <h2 style={{ flex: 1, justifyContent: 'center', alignItems:"center", lineHeight:"100px"}}>Login</h2>
+
           <form onSubmit={formik.handleSubmit}>
-            <h1>Login Page</h1>
+
             <input id="email" name="email" onChange={formik.handleChange} value={formik.values.email} placeholder="email" />
             <div className="text-red-500 text-x6">
               {formik.errors.email}
               <div>{serverError}</div>
             </div>
-            <input id="password" name="password" onChange={formik.handleChange} value={formik.values.password} placeholder="password" />
+            <input type="password" id="password" name="password" onChange={formik.handleChange} value={formik.values.password} placeholder="password" />
             <div classname="text-red-500 text-x6">
               {formik.errors.password}
               <div>{serverError}</div>
@@ -59,14 +65,24 @@ function Login() {
 
             <p className="link">
             </p>
+            <div>
+        
+        <p style={{textAlign: "center"}}>
+       
+        </p>
+      </div>
 
 
           </form>
+          
+        </p>
         </div>
 
 
       </div>
     </div>
+    </div>
+    </body>
   );
 }
 

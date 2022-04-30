@@ -3,9 +3,12 @@ import { useFormik } from "formik";
 import * as yup from "yup"
 import { signup } from '../services/auth';
 import { signupvalidationSchema } from '../utils/formutils';
+import { Navigate, useNavigate } from 'react-router-dom';
 
 
 function Signup() {
+    const Navigate = useNavigate()
+
     const formik = useFormik({
         initialValues: {
             firstname: "",
@@ -17,27 +20,20 @@ function Signup() {
             homeaddress: "",
         },
         validationSchema: signupvalidationSchema,
-        onSubmit: (values) => {
-            console.log("see me")
+        onSubmit: (Values) => {
             //call firebase to signup
-            signup(values, onSuccess, onFailure)
-        }
-    }
-    )
-
-    const onSuccess = () => {
-        // navigate to home page
-    }
-
-    const onFailure = (error) => {
-        // set server error
-    }
+            Navigate("/home")   
+          }
+        })
+        
+       
 
 
     return (
         <form onSubmit={formik.handleSubmit}>
-            <div>Signup</div>
-            <h1>Signup</h1>
+<h2 style={{textAlign: "center"}}>Sign Up </h2>
+        <p style={{textAlign: "center"}}>
+        <h2 style={{ flex: 1, justifyContent: 'center', alignItems:"center", lineHeight:"100px"}}>Fill in for New Users</h2>
             <input id="firstname" name="firstname" onChange={formik.handleChange} value={formik.values.firstname} placeholder="firstname" />
             <div classname="text-red-500 text-x6">
                 {formik.errors.firstname}
@@ -54,7 +50,7 @@ function Signup() {
             <div classname="text-red-500 text-x6">
                 {formik.errors.password}
             </div>
-            <input id="confirmpassword" name="confirmpassword" onChange={formik.handleChange} value={formik.values.confirmpassword} placehlder="confirmpassword" />
+            <input id="confirmpassword" name="confirmpassword" onChange={formik.handleChange} value={formik.values.confirmpassword} placehlder="confirmpassword"/>
             <div classname="text-red-500 text-x6">
                 {formik.errors.confirmpassword}
             </div>
@@ -69,7 +65,7 @@ function Signup() {
             <div className="submit-button">
                 <button type='submit'>submit</button>
             </div>
-
+</p>
 
 
 
@@ -78,4 +74,5 @@ function Signup() {
         </form>
     )
 }
+
 export default Signup;

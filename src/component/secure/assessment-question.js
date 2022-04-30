@@ -1,14 +1,17 @@
 import { useState } from "react";
 import { useFormik } from "formik";
+ import { useState as useGlobalState } from "@hookstate/core";
+ import store from "../../store";
  
- 
-const AssessmentQuestions = ({ listOfQuestions }) => {
+const AssessmentQuestions = ({  }) => {
+    const { user, questions } = useGlobalState(store)
+    const listOfQuestions = questions.get()
    const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0)
    const [processing, setProcessing] = useState(false)
    const formik = useFormik({
  
  
-       initialValues: {
+       initialValues: { 
  
        },
        onSubmit: async (values) => {
